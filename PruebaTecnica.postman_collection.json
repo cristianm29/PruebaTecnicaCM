@@ -74,6 +74,47 @@
 				"url": null
 			},
 			"response": []
+		},
+		{
+			"name": "Validar Cupon",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "autc",
+						"value": "Customer",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "valid_since",
+							"value": "2021-03-04T00:00:00.000",
+							"type": "text"
+						},
+						{
+							"key": "valid_until",
+							"value": "2021-03-04T23:59:00.999",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/Validar/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Validar",
+						"2"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

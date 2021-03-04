@@ -21,7 +21,7 @@ function listar_pro (req, res) {
 
 function Auten_Admin (req, res, next){
 
-    let autA = req.headers.auta;
+    var autA = req.headers.auta;
 
     if (autA === 'Admin'){
 
@@ -35,7 +35,7 @@ function Auten_Admin (req, res, next){
 
 function Auten_Customer (req, res, next){
 
-    let autC = req.headers.autc;
+    var autC = req.headers.autc;
 
     if (autC === 'Customer'){
 
@@ -83,12 +83,23 @@ function listar_un_cupon (req, res){
     });
 }
 
+function validar_cupon (req, res){
+    const cupon = Cargar_cupon.find(datos => datos.id === parseInt(req.params.id))
+
+    cupon.valid_since = req.body.valid_since,
+    cupon.valid_until= req.body.valid_until,
+
+    res.status(200).json({
+        datos : Cargar_cupon.find(datos => datos.id === parseInt(req.params.id))
+    });
+}
 
 enrutar.get('/productos', [Auten_Admin, listar_pro]);
 enrutar.get('/productos/:id', [Auten_Admin, listar_un_pro]);
 enrutar.post('/crearcupon', [Auten_Admin, crearcupon]);
 enrutar.get('/cupones', [Auten_Admin, listar_cupon]);
 enrutar.get('/cupones/:id', [Auten_Admin, listar_un_cupon]);
+enrutar.post('/Validar/:id', [Auten_Customer, validar_cupon]);
 
 
 
