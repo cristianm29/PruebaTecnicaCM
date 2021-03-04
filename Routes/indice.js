@@ -16,11 +16,7 @@ var Cargar_cupon = [
 
 function listar_pro (req, res) {
     
-    res.status(200).json({
-
-        datos : Cargar_productos
-
-    });
+    res.status(200).json({ datos : Cargar_productos });
 }
 
 function Auten_Admin (req, res, next){
@@ -33,11 +29,7 @@ function Auten_Admin (req, res, next){
 
     } else {
 
-        res.status(200).json({
-
-            message : 'Error 403'
-
-        });
+        res.status(200).json({ message : 'Error 403' });
     }
 }
 
@@ -51,14 +43,19 @@ function Auten_Customer (req, res, next){
 
     } else {
 
-        res.status(200).json({
-
-            message : 'Error 403'
-
-        });
+        res.status(200).json({ message : 'Error 403' });
     }
 }
 
+function listar_un_pro (req, res){
+
+    res.status(200).json({ 
+        datos : Cargar_productos.find(datos => datos.id === parseInt(req.params.id)) 
+    });
+}
+
 enrutar.get('/productos', [Auten_Admin, listar_pro]);
+enrutar.get('/productos/:id', [Auten_Admin, listar_un_pro]);
+
 
 module.exports = enrutar;
