@@ -74,8 +74,13 @@ function crearcupon (req, res){
 }
 
 function listar_cupon (req, res) {
-    
     res.status(200).json({ datos : Cargar_cupon });
+}
+
+function listar_un_cupon (req, res){
+    res.status(200).json({ 
+        datos : Cargar_cupon.find(datos => datos.id === parseInt(req.params.id)) 
+    });
 }
 
 
@@ -83,6 +88,7 @@ enrutar.get('/productos', [Auten_Admin, listar_pro]);
 enrutar.get('/productos/:id', [Auten_Admin, listar_un_pro]);
 enrutar.post('/crearcupon', [Auten_Admin, crearcupon]);
 enrutar.get('/cupones', [Auten_Admin, listar_cupon]);
+enrutar.get('/cupones/:id', [Auten_Admin, listar_un_cupon]);
 
 
 
