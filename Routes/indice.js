@@ -54,8 +54,29 @@ function listar_un_pro (req, res){
     });
 }
 
+function crearcupon (req, res){
+
+    Cargar_cupon.push({
+
+        id: Cargar_cupon.length + 1,
+        name: req.body.nombre,
+        description: req.body.descripcion,
+        product_id: parseInt(req.body.id_producto),
+        valid_since: req.body.valid_since,
+        valid_until: req.body.valid_until,
+
+    })
+
+    res.status(200).json({
+        datos : Cargar_cupon.find(datos => datos.id === parseInt(Cargar_cupon.length))
+    });
+   // console.log(req.body);
+}
+
 enrutar.get('/productos', [Auten_Admin, listar_pro]);
 enrutar.get('/productos/:id', [Auten_Admin, listar_un_pro]);
+enrutar.post('/crearcupon', [Auten_Admin, crearcupon]);
+
 
 
 module.exports = enrutar;
